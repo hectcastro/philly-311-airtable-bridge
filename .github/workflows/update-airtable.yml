@@ -1,0 +1,36 @@
+name: Airtable
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # Hourly
+    - cron: 0 * * * *
+
+jobs:
+  airtable:
+    runs-on: ubuntu-latest
+    env:
+      AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: |
+          npm i -g npm@7
+          npm ci
+
+      - name: Update Airtable
+        run: |
+          npm run cli

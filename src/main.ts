@@ -17,6 +17,8 @@ async function updateServiceRecord(recordId: string, serviceRecordId: string) {
     await CLIENT.get(`/${serviceRecordId}.json`)
   ).data[0];
 
+  process.stdout.write(`Update service record [${serviceRecordId}] ... `);
+
   BASE("Main").update([
     {
       id: recordId,
@@ -35,6 +37,8 @@ async function updateServiceRecord(recordId: string, serviceRecordId: string) {
       },
     },
   ]);
+
+  console.log("Complete!");
 }
 
 export const init = async (): Promise<void> => {
