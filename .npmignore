@@ -1,0 +1,14 @@
+/.github/
+/node_modules/
+/build/
+/tmp/
+/docs/
+
+coverage
+*.log
+
+package-lock.json
+/*.tgz
+/tmp*
+/mnt/
+/package/
