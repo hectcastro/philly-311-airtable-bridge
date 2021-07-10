@@ -1,4 +1,7 @@
 {
+  "name": "philly-311-airtable-bridge",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "cli": "ts-node src/cli.ts",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
