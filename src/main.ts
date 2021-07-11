@@ -1,10 +1,16 @@
 import Airtable from "airtable";
 import axios from "axios";
 import { ServiceRequest } from "./model/service-request";
+import bunyan from "bunyan";
 
 const BASE = Airtable.base("appZ8dYWkOzM3VdT6");
 const CLIENT = axios.create({
   baseURL: "https://api.phila.gov/open311/v2/requests",
+});
+const LOGGER = bunyan.createLogger({
+  name: "philly-311-airtable-bridge",
+  level: bunyan.INFO,
+  stream: process.stdout,
 });
 
 function capitalize(word: string) {
@@ -17,7 +23,10 @@ async function updateServiceRecord(recordId: string, serviceRecordId: string) {
     await CLIENT.get(`/${serviceRecordId}.json`)
   ).data[0];
 
-  process.stdout.write(`Update service record [${serviceRecordId}] ... `);
+  LOGGER.info(
+    { airtableRecordId: recordId, serviceRecordId: serviceRecordId },
+    "Updating"
+  );
 
   BASE("Main").update([
     {
@@ -38,7 +47,10 @@ async function updateServiceRecord(recordId: string, serviceRecordId: string) {
     },
   ]);
 
-  console.log("Complete!");
+  LOGGER.info(
+    { airtableRecordId: recordId, serviceRecordId: serviceRecordId },
+    "Update complete"
+  );
 }
 
 export const init = async (): Promise<void> => {
