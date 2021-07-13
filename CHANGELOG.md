@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/hectcastro/philly-311-airtable-bridge/compare/v0.1.0...v0.1.1) (2021-07-13)
+
+
+### Features
+
+* add bunyan json-based logger ([d979548](https://github.com/hectcastro/philly-311-airtable-bridge/commit/d97954822c05f3283747f9e191ee4da51b98314d))
+* stop processing closed requests ([0623ef5](https://github.com/hectcastro/philly-311-airtable-bridge/commit/0623ef5f09427207075df2dd6e5b49e8a368d3c3))
+
 ## 0.1.0 (2021-07-10)
 
 
