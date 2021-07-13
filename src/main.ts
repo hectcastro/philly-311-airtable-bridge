@@ -58,7 +58,9 @@ export const init = async (): Promise<void> => {
     .select()
     .eachPage(async (records) => {
       for (const record of records) {
-        await updateServiceRecord(record.getId(), record.get("ID") as string);
+        if ((record.get("Status") as string) != "Closed") {
+          await updateServiceRecord(record.getId(), record.get("ID") as string);
+        }
       }
     });
 };
