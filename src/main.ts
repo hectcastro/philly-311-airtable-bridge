@@ -3,7 +3,7 @@ import axios from "axios";
 import { ServiceRequest } from "./model/service-request";
 import bunyan from "bunyan";
 
-const BASE = Airtable.base("appZ8dYWkOzM3VdT6");
+const BASE = Airtable.base(process.env.AIRTABLE_BASE_ID ?? "");
 const CLIENT = axios.create({
   baseURL: "https://api.phila.gov/open311/v2/requests",
 });
