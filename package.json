@@ -12,7 +12,7 @@
     "release": "standard-version"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
+    "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@types/bunyan": "^1.8.7",
     "@types/node": "^16.4.3",
