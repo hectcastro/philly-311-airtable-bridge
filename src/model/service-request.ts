@@ -1,17 +1,17 @@
 export interface ServiceRequest {
-  service_request_id: string;
+  serviceRequestID: string;
   status: string;
-  status_notes: string;
-  service_name: string;
-  service_code: string;
-  description?: null;
-  agency_responsible: string;
-  service_notice: string;
-  requested_datetime: string;
-  updated_datetime: string;
-  expected_datetime: string;
+  statusNotes: string;
+  serviceName: string;
+  serviceCode: string;
+  description: null;
+  agencyResponsible: string;
+  serviceNotice: string;
+  requestedDatetime: string;
+  updatedDatetime: string;
+  expectedDatetime: string;
   address: string;
-  zipcode: string;
+  zipcode: null;
   lat: number;
   long: number;
 }

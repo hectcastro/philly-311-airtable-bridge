@@ -1,7 +1,7 @@
 import Airtable from "airtable";
 import axios from "axios";
-import { ServiceRequest } from "./model/service-request";
 import bunyan from "bunyan";
+import { ServiceRequest } from "./model/service-request";
 
 const BASE = Airtable.base(process.env.AIRTABLE_BASE_ID ?? "");
 const CLIENT = axios.create({
@@ -33,16 +33,16 @@ async function updateServiceRecord(recordId: string, serviceRecordId: string) {
       id: recordId,
       fields: {
         ID: serviceRecordId,
-        Status: capitalize(serviceRequest.status),
-        "Status Notes": serviceRequest.status_notes,
-        "Service Code": serviceRequest.service_code,
-        "Service Name": serviceRequest.service_name,
-        "Service Notice": serviceRequest.service_notice ?? "N/A",
-        "Date Requested": serviceRequest.requested_datetime,
-        "Date Expected": serviceRequest.expected_datetime,
-        "Last Updated (By 311)": serviceRequest.updated_datetime,
+        Status: serviceRequest.status,
+        "Status Notes": serviceRequest.statusNotes,
+        "Service Code": serviceRequest.serviceCode,
+        "Service Name": serviceRequest.serviceName,
+        "Service Notice": serviceRequest.serviceNotice ?? "N/A",
+        "Date Requested": serviceRequest.requestedDatetime,
+        "Date Expected": serviceRequest.expectedDatetime,
+        "Last Updated (By 311)": serviceRequest.updatedDatetime,
         Address: serviceRequest.address,
-        Department: serviceRequest.agency_responsible,
+        Department: serviceRequest.agencyResponsible,
       },
     },
   ]);
