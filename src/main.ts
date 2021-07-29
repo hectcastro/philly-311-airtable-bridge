@@ -1,6 +1,7 @@
 import Airtable from "airtable";
 import axios from "axios";
 import bunyan from "bunyan";
+import * as _ from "lodash";
 import { ServiceRequest } from "./model/service-request";
 
 const BASE = Airtable.base(process.env.AIRTABLE_BASE_ID ?? "");
@@ -13,14 +14,9 @@ const LOGGER = bunyan.createLogger({
   stream: process.stdout,
 });
 
-function capitalize(word: string) {
-  if (!word) return word;
-  return word[0].toUpperCase() + word.substr(1).toLowerCase();
-}
-
 async function updateServiceRecord(recordId: string, serviceRecordId: string) {
   const serviceRequest: ServiceRequest = (
-    await CLIENT.get(`/${serviceRecordId}.json`)
+    await CLIENT.get<ServiceRequest[]>(`/${serviceRecordId}.json`)
   ).data[0];
 
   LOGGER.info(
@@ -33,7 +29,7 @@ async function updateServiceRecord(recordId: string, serviceRecordId: string) {
       id: recordId,
       fields: {
         ID: serviceRecordId,
-        Status: serviceRequest.status,
+        Status: _.upperFirst(serviceRequest.status),
         "Status Notes": serviceRequest.statusNotes,
         "Service Code": serviceRequest.serviceCode,
         "Service Name": serviceRequest.serviceName,
